@@ -12,3 +12,4 @@ on (and later gate against) them during planning and review.
 
 Why it's split this way, and what that means for adding a new standard or
 distributing this module: [docs/adr/0001-two-layer-standards-architecture.md](docs/adr/0001-two-layer-standards-architecture.md).
+
