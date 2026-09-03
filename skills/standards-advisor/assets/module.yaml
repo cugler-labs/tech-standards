@@ -1,0 +1,12 @@
+code: stds
+name: "Tech Standards Advisor"
+description: "Advisory access to the org technical standards corpus during planning, implementation, and review."
+module_version: 0.1.0
+default_selected: false
+module_greeting: >
+  Tech Standards Advisor is installed. Ask "which standards apply here?"
+  during planning, or "check standards" during review, to get a
+  citation-backed read against the standards corpus (currently
+  STD-LOG-001: Structured Logging Format, STD-API-001: General API Design
+  Principles). Findings are advisory only in this phase — nothing is
+  blocked.

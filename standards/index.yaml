@@ -1,0 +1,20 @@
+# Catalog of standards. This file is the single source of truth for what
+# standards exist and their lifecycle status — the BMAD wrapper reads this,
+# it does not duplicate it.
+standards:
+  - id: STD-LOG-001
+    title: Structured Logging Format
+    status: draft        # draft -> advisory -> gating -> deprecated
+    version: 0.1.0
+    path: STD-LOG-001.md
+    checklist: checklists/STD-LOG-001.check.yaml
+    applies_to: [services, cli-tools, background-jobs]
+
+  - id: STD-API-001
+    title: General API Design Principles
+    status: draft
+    version: 0.1.0
+    path: STD-API-001.md
+    checklist: checklists/STD-API-001.check.yaml
+    applies_to: [services, public-apis, internal-apis]
+    source: Zalando RESTful API Guidelines (CC-BY 4.0), adapted

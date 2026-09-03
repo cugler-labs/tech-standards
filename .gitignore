@@ -1,0 +1,19 @@
+# macOS metadata
+.DS_Store
+
+# Personal BMAD configuration
+_bmad/config.user.toml
+_bmad/config.user.yaml
+
+# Claude/BMad installer output
+.claude/
+.claude-plugin/
+
+# Generated BMAD output and reports
+_bmad-output/
+skills/reports/
+
+# Python cache and test artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/

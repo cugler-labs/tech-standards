@@ -1,0 +1,87 @@
+standard: STD-LOG-001
+version: 0.1.0
+# Each assertion is written to be answerable two ways:
+#  - by an agent during advisory review, reading the code/config
+#  - by a lint/CI rule during gating, reading emitted log samples or source
+# `severity: must` items are what gating will eventually fail a build on.
+# `severity: should` items are advisory-only, forever (unless later promoted).
+assertions:
+  - id: LOG-001-a
+    severity: must
+    statement: >
+      Every log line emitted to stdout/stderr is a single valid JSON object
+      (no pretty-printing, no multi-line payloads outside JSON string values).
+    check_kind: static_or_runtime
+    static_hint: >
+      Grep for logger configuration; confirm a JSON/structured formatter is
+      configured (not a plain-text/console formatter) for non-dev environments.
+    runtime_hint: >
+      Capture N sample log lines from a running instance; each must
+      JSON.parse() successfully as a single object.
+
+  - id: LOG-001-b
+    severity: must
+    statement: >
+      Every log line includes `timestamp` (ISO 8601 UTC, ms precision),
+      `level` (one of debug|info|warn|error|fatal, lowercase), `service`,
+      and `message`.
+    check_kind: runtime
+    runtime_hint: >
+      For each captured sample line, assert presence and type of all four
+      fields; assert `level` is in the enum; assert `timestamp` matches
+      `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$`.
+
+  - id: LOG-001-c
+    severity: must
+    statement: >
+      Log lines emitted inside a traced request include `trace_id`.
+    check_kind: runtime
+    runtime_hint: >
+      Trigger a request through the service's tracing middleware; assert
+      every log line produced during that request's lifecycle carries the
+      same non-empty `trace_id`.
+
+  - id: LOG-001-d
+    severity: must
+    statement: >
+      Log lines emitted during error handling include a nested `error`
+      object with `message` and `stack`, not a flattened string in `message`.
+    check_kind: runtime
+    runtime_hint: >
+      Trigger a handled exception path; assert the resulting log line has
+      `error.message` and `error.stack` as object fields.
+
+  - id: LOG-001-e
+    severity: must
+    statement: >
+      No log line contains a value matching a secret/token/PAN pattern in
+      any field.
+    check_kind: static_or_runtime
+    static_hint: >
+      Run existing secret-scan tooling against captured log samples.
+
+  - id: LOG-001-f
+    severity: must
+    statement: >
+      No raw stdout debug calls (console.log/print/equivalent) remain in
+      code destined for merge, outside an explicitly ignored dev-scratch path.
+    check_kind: static
+    static_hint: >
+      Lint rule / grep for the language's raw print primitive outside test
+      and scratch directories.
+
+  - id: LOG-001-g
+    severity: should
+    statement: >
+      Request-specific structured data is attached under a nested `context`
+      object rather than interpolated into `message`.
+    check_kind: manual_or_agent_review
+    note: Advisory only. Not gated in phase 1.
+
+  - id: LOG-001-h
+    severity: should
+    statement: >
+      Log lines include `env` unless the transport layer already tags
+      environment.
+    check_kind: manual_or_agent_review
+    note: Advisory only. Not gated in phase 1.

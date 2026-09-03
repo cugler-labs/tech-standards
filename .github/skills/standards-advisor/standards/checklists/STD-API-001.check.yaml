@@ -1,0 +1,73 @@
+standard: STD-API-001
+version: 0.1.0
+assertions:
+  - id: API-001-a
+    severity: must
+    statement: >
+      An OpenAPI specification for the API exists and was authored/updated
+      before (or alongside) the implementation it describes, not written
+      retroactively after the API shipped.
+    check_kind: manual_or_agent_review
+    note: >
+      "Before implementation" is not mechanically verifiable after the
+      fact from a single snapshot; an agent can check the spec exists and
+      flag if PR history shows implementation merged with no accompanying
+      spec change.
+
+  - id: API-001-b
+    severity: must
+    statement: >
+      A non-component-internal API has documented review sign-off (PR
+      approval, review-tool record, etc.) from someone outside the owning
+      team before being considered final.
+    check_kind: manual_or_agent_review
+
+  - id: API-001-c
+    severity: must
+    statement: >
+      The OpenAPI spec is a single self-contained file (YAML preferred),
+      checked into version control alongside or referenced from the
+      service repository.
+    check_kind: static
+    static_hint: >
+      Confirm an openapi.yaml/openapi.json (or equivalent) exists in the
+      repo and validates against the OpenAPI schema for its declared
+      version.
+
+  - id: API-001-d
+    severity: must
+    statement: >
+      The published/deployed API is discoverable from the same spec that
+      is version-controlled — i.e. there isn't a deployed API with no
+      accessible spec, or a spec that has drifted from what's deployed.
+    check_kind: manual_or_agent_review
+
+  - id: API-001-e
+    severity: should
+    statement: >
+      A non-trivial, non-internal-only API has a linked user manual
+      (externalDocs.url) covering scope, examples, edge cases, and
+      architectural context.
+    check_kind: static_or_runtime
+    static_hint: Check for a populated externalDocs.url in the spec.
+
+  - id: API-001-f
+    severity: must
+    statement: >
+      All resource names, property names, descriptions, and enum values in
+      the spec use U.S. English spelling and terminology consistently.
+    check_kind: static
+    static_hint: >
+      Spell-check spec string fields against a U.S. English dictionary;
+      flag common British/other-locale spellings (colour, licence, etc.).
+
+  - id: API-001-g
+    severity: must
+    statement: >
+      The spec contains no $ref to a mutable location (a branch-relative
+      GitHub URL, a wiki page, a non-version-pinned path) for anything
+      outside the spec's own file.
+    check_kind: static
+    static_hint: >
+      Grep the spec for external $ref targets; flag any that are not a
+      version-pinned/immutable internal reference per org policy.
