@@ -1,40 +1,47 @@
-# Release v0.1.0-alpha.1
+# Release v0.1.0-alpha.2
 
-## Internal pilot prerelease
+## Internal testing prerelease
 
-This is an internal pilot snapshot of the technical standards advisor. It is intended for selected teams to test standards discovery, checklist interpretation, packaging, and the consumer workflow before a final release.
+This release improves the internal installation and discovery path for the technical standards advisor. It is intended for company teams testing BMAD installation from a pinned GitHub release and, where applicable, Claude-style marketplace discovery.
 
 This release is not final. The standards remain advisory and are still marked `draft`.
 
 ## Included
 
-- `STD-LOG-001` - Structured Logging Format
-- `STD-API-001` - General API Design Principles
-- `standards-advisor` for identifying applicable standards and reporting checklist findings
-- `release-manager` and `pre-release` guidance for SemVer release preparation and validation
+- The unchanged `standards-advisor` module and standards snapshot from `v0.1.0-alpha.1`.
+- GitHub installer instructions using BMAD's `--custom-source` and `--pin` options.
+- `.claude-plugin/marketplace.json` for company-only Claude marketplace discovery.
+- Clarification that BMAD module installation and Claude marketplace discovery are separate mechanisms.
 
 ## Consumer reference
 
 Pin the exact prerelease tag:
 
 ```text
-v0.1.0-alpha.1
+v0.1.0-alpha.2
 ```
 
-Do not consume `main` for the pilot. The tag is the reproducible snapshot under evaluation.
+Install the BMAD module with:
 
-## Pilot validation requested
+```bash
+npx bmad-method install \
+  --custom-source https://github.com/cugler-labs/tech-standards.git \
+  --pin stds=v0.1.0-alpha.2
+```
 
-Pilot teams should verify that they can:
+Do not consume `main` for testing. The tag is the reproducible snapshot under evaluation.
 
-- install or copy the standards-advisor snapshot from the tagged repository;
-- ask which standards apply to their work;
-- understand findings cited by standard and checklist assertion ID;
-- update to a later prerelease without relying on unversioned `main` content; and
-- report unclear requirements, missing applicability categories, packaging problems, or unexpected consumer impact.
+## Testing requested
+
+Internal teams should verify that they can:
+
+- install the private module from the tagged repository;
+- authenticate without placing credentials in the repository URL;
+- see the self-registration assets under `.github/skills/standards-advisor/`;
+- use `Which standards apply here?` or `Check standards` after installation;
+- discover the Claude marketplace manifest if that integration is enabled; and
+- report installation, discovery, or standards interpretation problems.
 
 ## Final-release policy
 
 A final release may be created only when every catalog entry has `status: approved` or `status: deprecated`. The current catalog contains two `draft` standards, so this candidate must not be promoted to a final release yet.
-
-Feedback from the pilot should be addressed in a later prerelease or documented as accepted risk before approval and final-release promotion.

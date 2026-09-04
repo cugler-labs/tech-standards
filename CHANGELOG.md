@@ -15,6 +15,21 @@ The release tag is the consumer contract. Downstream BMad projects should pin an
 
 - Internal pilot prerelease. `STD-LOG-001` and `STD-API-001` remain `draft` and advisory only.
 
+## [0.1.0-alpha.2] - 2026-09-04
+
+### Distribution
+
+- GitHub installer guide for installing the private standards module with BMAD's `--custom-source` and `--pin` options.
+- Claude marketplace manifest for company-only plugin discovery.
+
+### Changed
+
+- Clarified the distinction between BMAD module installation and Claude marketplace discovery.
+
+### Release status
+
+- Internal testing prerelease. Standards remain unchanged, `draft`, and advisory only.
+
 ## [Unreleased]
 
 No changes yet.

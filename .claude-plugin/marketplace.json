@@ -1,0 +1,20 @@
+{
+  "name": "company-tech-standards",
+  "owner": {
+    "name": "Company Architecture Governance"
+  },
+  "description": "Internal technical standards advisor for BMad projects",
+  "repository": "https://github.com/cugler-labs/tech-standards",
+  "plugins": [
+    {
+      "name": "standards-advisor",
+      "displayName": "Company Standards Advisor",
+      "source": "./",
+      "description": "Advises on applicable company technical standards and reports checklist findings.",
+      "version": "0.1.0-alpha.2",
+      "skills": [
+        "./.github/skills/standards-advisor"
+      ]
+    }
+  ]
+}
