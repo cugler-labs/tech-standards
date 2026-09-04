@@ -4,13 +4,13 @@ Downstream BMad projects consume the technical standards through an immutable Gi
 
 ## Internal pilot
 
-The initial pilot release is:
+The current pilot release is:
 
 ```text
-v0.1.0-alpha.1
+v0.1.0-alpha.2
 ```
 
-Use that exact tag when installing or copying the `standards-advisor` skill. The snapshot contains the standards catalog, standard documents, and checklists that were reviewed for this candidate.
+Use that exact tag when installing the `standards-advisor` skill through the BMAD custom source. The release snapshot contains the standards catalog, standard documents, and checklists that were reviewed for this candidate. Do not copy the development tree directly: its `standards` path is a local-development link, not the portable consumer snapshot.
 
 The pilot is advisory only. `STD-LOG-001` and `STD-API-001` remain `draft`, so consuming teams should use the advisor to identify applicable guidance and report unclear requirements or packaging problems. They must not treat the findings as mandatory policy.
 

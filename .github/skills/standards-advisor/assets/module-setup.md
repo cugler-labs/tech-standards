@@ -17,6 +17,8 @@ Both config scripts use an anti-zombie pattern — existing entries for this mod
 
 `{project-root}` is a **literal token** in config _values_ (the data written into the files above) — never substitute it there. It signals to the consuming LLM that the value is relative to the project root, not the skill root. **This does not apply to the filesystem path _arguments_ passed to the scripts below** (the `--*-path`, `--*-dir`, and `--target` arguments): those are real paths, so you **must** resolve `{project-root}` to the actual project root before running, or the scripts will write to a literal `{project-root}/` directory under the skill folder. The scripts reject an unresolved token with an error.
 
+`{skill-root}` is the installed directory containing this skill. Resolve it to an absolute path before running the scripts. The consuming project must have `uv` available because both scripts use PEP 723 dependency metadata.
+
 ## Check Existing Config
 
 1. Read `./assets/module.yaml` for module metadata and variable definitions (the `code` field is the module identifier)
@@ -56,8 +58,8 @@ Write a temp JSON file with the collected answers structured as `{"core": {...},
 In the commands below, replace `{project-root}` in every path argument with the actual project root (e.g. `/home/me/myapp`) before running — these are filesystem paths, not config values.
 
 ```bash
-uv run ./scripts/merge-config.py --config-path "{project-root}/_bmad/config.yaml" --user-config-path "{project-root}/_bmad/config.user.yaml" --module-yaml ./assets/module.yaml --answers {temp-file}
-uv run ./scripts/merge-help-csv.py --target "{project-root}/_bmad/module-help.csv" --source ./assets/module-help.csv --module-code {module-code}
+uv run "{skill-root}/scripts/merge-config.py" --config-path "{project-root}/_bmad/config.yaml" --user-config-path "{project-root}/_bmad/config.user.yaml" --module-yaml "{skill-root}/assets/module.yaml" --answers {temp-file}
+uv run "{skill-root}/scripts/merge-help-csv.py" --target "{project-root}/_bmad/module-help.csv" --source "{skill-root}/assets/module-help.csv" --module-code {module-code}
 ```
 
 Both scripts output JSON to stdout with results. If either exits non-zero, surface the error and stop.

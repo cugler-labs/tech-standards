@@ -25,6 +25,12 @@ node --version
 npx bmad-method --help
 ```
 
+Install `uv` as well; the standalone module uses it to run its self-registration scripts:
+
+```bash
+uv --version
+```
+
 You must also have read access to the private `cugler-labs/tech-standards` repository. Authenticate using the company's approved GitHub method, such as GitHub CLI, SSH, or your organization's credential manager. Never put a GitHub token in the repository URL or in project configuration.
 
 ## Install BMAD and the standards module

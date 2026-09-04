@@ -1,7 +1,7 @@
 code: stds
 name: "Tech Standards Advisor"
 description: "Advisory access to the org technical standards corpus during planning, implementation, and review."
-module_version: 0.1.0
+module_version: 0.1.0-alpha.2
 default_selected: false
 module_greeting: >
   Tech Standards Advisor is installed. Ask "which standards apply here?"
