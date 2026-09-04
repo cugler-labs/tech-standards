@@ -7,6 +7,7 @@ _bmad/config.user.yaml
 
 # Claude/BMad installer output
 .claude/
+.agents/
 
 # Generated BMAD output and reports
 _bmad-output/
